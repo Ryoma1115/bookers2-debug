@@ -1,11 +1,16 @@
 class BooksController < ApplicationController
+	before_action :authenticate_user!
 
   def show
-  	@book = Book.find(params[:id])
+	@book_detail = Book.find(params[:id])
+	@user = @book_detail.user
+	@book = Book.new
   end
 
   def index
-  	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
+	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
+	@book = Book.new
+	@user = User.find(current_user.id)  
   end
 
   def create
@@ -42,7 +47,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-  	params.require(:book).permit(:title)
+  	params.require(:book).permit(:title, :body)
   end
 
 end
