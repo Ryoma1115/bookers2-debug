@@ -1,3 +1,16 @@
+<% if flash[:notice] %>
+	<p class="green"><%= flash[:notice] %></p>
+<% end %>
+
+    <% if @book.errors.any? %> 
+      <%= @book.errors.count %>  error prohibited this obj from being saved:
+      <% @book.errors.full_messages.each do |message| %>
+       <ul>
+        <li><%= message %></li>
+      </ul>
+      <% end %>
+    <% end %>
+
 <div class="row">
 	<div class="col-xs-3">
 		<h2>User info</h2>

@@ -1,4 +1,17 @@
-<%= form_for(book) do |f| %>
+<% if flash[:notice] %>
+	<p class="green"><%= flash[:notice] %></p>
+<% end %>
+
+    <% if @book.errors.any? %> 
+      <%= @book.errors.count %>  error prohibited this obj from being saved:
+      <% @book.errors.full_messages.each do |message| %>
+       <ul>
+        <li><%= message %></li>
+      </ul>
+      <% end %>
+    <% end %>
+
+<%= form_for(@book) do |f| %>
 	<div class="field row">
 		<%= f.label :title %>
 		<%= f.text_field :title, class: "col-xs-12 book_title" %>

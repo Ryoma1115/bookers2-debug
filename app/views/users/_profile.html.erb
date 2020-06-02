@@ -1,17 +1,21 @@
-<table class="table">
-		<tr><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></tr>
+        <%= attachment_image_tag @user, :profile_image, :fill, 100,100 , format: 'jpeg', class: "pull-left profile-img", fallback:"no_image.jpg" %>
+        <table class="table">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <td>name</td>
+              <td><%= @user.name %></td>
+            </tr>
+            <td>introduction</td>
+            <td><%= @user.introduction %></td>
+          </tbody>
+        </table>
 
-		<tr>
-			<th>name</th>
-			<th><%= user.name %></th>
-		</tr>
-
-		<tr>
-			<th>introduction</th>
-			<th><%= user.introduction %></th>
-		</tr>
-</table>
-
-<div class="row">
-	<%= link_to '',edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
-</div>
+        <div class="row">
+            <% if @user == current_user %>
+              <%= link_to(content_tag(:span, "", class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_15043"), edit_user_path(@user)) %>
+            <% else %>
+              <%= link_to(content_tag(:span, "", class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_15043"), user_path(current_user)) %>
+            <% end %>
+        </div>

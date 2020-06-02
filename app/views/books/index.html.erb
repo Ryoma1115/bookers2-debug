@@ -1,3 +1,16 @@
+<% if flash[:notice] %>
+	<p class="green"><%= flash[:notice] %></p>
+<% end %>
+
+    <% if @book.errors.any? %> 
+      <%= @book.errors.count %>  error prohibited this obj from being saved:
+      <% @book.errors.full_messages.each do |message| %>
+       <ul>
+        <li><%= message %></li>
+      </ul>
+      <% end %>
+    <% end %>
+
 <div class="row">
 	<div class="col-xs-3">
 
@@ -31,7 +44,7 @@
 						<%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
 						<% end %>
 					</td>
-					<td><%= link_to book.title, book, class: "book_#{book.id}" %></td>
+					<td><%= link_to book.title, book_path(book) %></td>
 					<td><%= book.body %></td>
 				</tr>
 				<% end %>
